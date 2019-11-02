@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+    id 'maven'
+}
+
+group 'com.ivan1pl'
+version '0.1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://hub.spigotmc.org/nexus/content/repositories/public/'
+    }
+}
+
+dependencies {
+    annotationProcessor group: 'com.google.auto.service', name: 'auto-service', version: '1.0-rc5'
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
+    compile group: 'net.sourceforge.argparse4j', name: 'argparse4j', version: '0.8.1'
+    compileOnly group: 'com.google.auto.service', name: 'auto-service', version: '1.0-rc5'
+    compileOnly group: 'org.spigotmc', name: 'spigot-api', version: '1.13.2-R0.1-SNAPSHOT'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jar {
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
